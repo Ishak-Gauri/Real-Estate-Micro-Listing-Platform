@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -194,7 +194,6 @@ function FooterSection() {
         .cpbar { background:linear-gradient(135deg,#c9906e,#b07050);padding:16px 40px;text-align:center;margin:0 -40px;font-family:'Jost',sans-serif;font-size:13px;color:rgba(255,255,255,0.85); }
       `}</style>
 
-      {/* HERO BANNER */}
       <div className="footer-hero">
         <img src="/hero-aerial.png" alt="Luxury properties" />
         <div className="fh-overlay" />
@@ -209,7 +208,6 @@ function FooterSection() {
         </div>
       </div>
 
-      {/* CALL MODAL */}
       {showCallForm && (
         <div className="cm-overlay" onClick={e => { if (e.target === e.currentTarget) setShowCallForm(false); }}>
           <div className="cm-box">
@@ -247,7 +245,6 @@ function FooterSection() {
         </div>
       )}
 
-      {/* MID SECTION */}
       <div className="mid-sec">
         <h3 className="mid-ttl">Find A New Home<br />On The Go</h3>
         <a href="#" className="dl-btn">
@@ -256,7 +253,6 @@ function FooterSection() {
         </a>
       </div>
 
-      {/* FOOTER GRID */}
       <div className="fg">
         <div>
           <div className="logo-t">Red<span className="logo-d">.</span></div>
@@ -281,7 +277,6 @@ function FooterSection() {
         </div>
       </div>
 
-      {/* COPYRIGHT */}
       <div className="cpbar">Copyright ©Red. All Rights Reserved {new Date().getFullYear()}</div>
     </div>
   );
@@ -333,7 +328,6 @@ function ForSale() {
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
         *, *::before, *::after { box-sizing:border-box;margin:0;padding:0; }
         :root { --cream:#f5f4f0;--ink:#16140f;--gold:#9a7c3f;--gold-light:#c9a84c;--warm-white:#fefcf8;--muted:#8a8070;--border:rgba(154,124,63,0.18);--card-shadow:0 1px 3px rgba(22,20,15,0.06),0 8px 24px rgba(22,20,15,0.08);--card-shadow-hover:0 2px 6px rgba(22,20,15,0.08),0 20px 48px rgba(22,20,15,0.14); }
-
         .city-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
         .city-card { position:relative;border-radius:14px;overflow:hidden;height:128px;cursor:pointer;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s ease;box-shadow:0 2px 12px rgba(22,20,15,0.12); }
         .city-card:hover { transform:translateY(-4px);box-shadow:0 12px 36px rgba(22,20,15,0.2); }
@@ -342,11 +336,9 @@ function ForSale() {
         .city-card:hover img { transform:scale(1.06); }
         .city-overlay { position:absolute;inset:0;background:linear-gradient(105deg,rgba(22,14,4,0.78) 0%,rgba(22,14,4,0.3) 60%,transparent 100%);display:flex;align-items:center;padding:0 24px; }
         .city-label { font-family:'Playfair Display',serif;font-size:21px;font-weight:500;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,0.6); }
-
         .prop-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px; }
         @media(max-width:1000px){ .prop-grid { grid-template-columns:repeat(2,1fr); } }
         @media(max-width:640px){ .prop-grid { grid-template-columns:1fr; } }
-
         .prop-card { background:var(--warm-white);border-radius:14px;overflow:hidden;border:1px solid rgba(22,20,15,0.07);box-shadow:var(--card-shadow);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s ease;display:flex;flex-direction:column; }
         .prop-card:hover { transform:translateY(-6px);box-shadow:var(--card-shadow-hover); }
         .card-img-wrap { position:relative;height:200px;overflow:hidden;flex-shrink:0;background:#1a1a2e; }
@@ -373,7 +365,6 @@ function ForSale() {
         .card-action-price { padding:9px 12px;background:#c9906e;color:#fff;font-family:'Jost',sans-serif;font-weight:600;font-size:12px;white-space:nowrap; }
         .card-arrow { width:32px;height:32px;border-radius:50%;background:#16140f;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;text-decoration:none;transition:background 0.2s ease; }
         .card-arrow:hover { background:var(--gold); }
-
         .filters-btn { display:inline-flex;align-items:center;gap:10px;padding:10px 22px;border-radius:100px;background:#fff;border:1.5px solid #e5e5e5;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:#1a1a1a;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.2s ease; }
         .filters-btn:hover { border-color:var(--gold); }
         .filters-btn.open { border-color:var(--gold);background:rgba(154,124,63,0.04); }
@@ -383,18 +374,15 @@ function ForSale() {
         .chip { padding:6px 14px;border-radius:100px;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;cursor:pointer;border:1px solid #e5e5e5;background:#f9f9f9;color:#555;transition:all 0.2s ease; }
         .chip:hover { border-color:var(--gold);color:var(--gold); }
         .chip.active { background:var(--ink);color:#fff;border-color:var(--ink); }
-
         .eyebrow { font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px; }
         .section-heading { font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,40px);font-weight:400;color:var(--ink);line-height:1.15; }
         .section-heading em { font-style:italic;color:var(--gold); }
         .rule { width:36px;height:2px;background:var(--gold-light);margin-top:10px;opacity:0.6; }
-
         .pagination { display:flex;align-items:center;justify-content:center;gap:6px;margin-top:48px; }
         .page-btn { width:38px;height:38px;border-radius:50%;border:1px solid #e5e5e5;background:#fff;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;color:#555;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease; }
         .page-btn:hover { border-color:var(--gold);color:var(--gold); }
         .page-btn.active { background:var(--ink);color:#fff;border-color:var(--ink); }
         .page-btn:disabled { opacity:0.3;cursor:not-allowed; }
-
         .shimmer { background:linear-gradient(90deg,#ebe9e2 25%,#dedad2 50%,#ebe9e2 75%);background-size:200% 100%;animation:sh 1.5s infinite;border-radius:14px; }
         @keyframes sh { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
         .fade-up { animation:fu 0.45s ease both; }
@@ -406,7 +394,6 @@ function ForSale() {
         .empty-state p { font-family:'Playfair Display',serif;font-size:17px;color:var(--muted);margin-top:10px;font-style:italic; }
       `}</style>
 
-      {/* PAGE HEADER */}
       <div style={{ background:'#fff',borderBottom:'1px solid rgba(22,20,15,0.08)',padding:'60px 40px 48px',textAlign:'center' }}>
         <p className="eyebrow">Discover Properties</p>
         <h1 className="section-heading">
@@ -417,7 +404,6 @@ function ForSale() {
 
       <div style={{ maxWidth:'1280px',margin:'0 auto',padding:'48px 40px 80px' }}>
 
-        {/* CITY GRID */}
         <div style={{ display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:'16px' }}>
           <div>
             <p className="eyebrow">Our Regions</p>
@@ -434,7 +420,6 @@ function ForSale() {
           ))}
         </div>
 
-        {/* CITY RESULTS */}
         {selectedCity && (
           <div id="city-results" style={{ marginBottom:'64px' }} className="fade-up">
             <div style={{ display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:'24px',paddingBottom:'16px',borderBottom:'1px solid rgba(22,20,15,0.08)' }}>
@@ -457,7 +442,6 @@ function ForSale() {
           </div>
         )}
 
-        {/* FEATURED SECTION */}
         <div style={{ display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'20px' }}>
           <div>
             <p className="eyebrow">Featured Properties</p>
@@ -522,10 +506,7 @@ function ForSale() {
           </>
         )}
 
-        {/* CTA BANNER */}
         <CTABanner />
-
-        {/* FOOTER */}
         <FooterSection />
 
       </div>
@@ -571,4 +552,13 @@ function PropertyCard({ listing, index }) {
   );
 }
 
-export default ForSale;
+// ── THE ONLY CHANGE: wrap ForSale in Suspense ──
+function ForSaleWrapper() {
+  return (
+    <Suspense fallback={<div style={{ minHeight:'100vh', background:'#f5f4f0' }} />}>
+      <ForSale />
+    </Suspense>
+  );
+}
+
+export default ForSaleWrapper;
